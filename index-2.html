@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Temple Pooja – UPI Demo</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:360px;margin:30px auto;padding:0 16px;text-align:center;background:#fff8ee}
+h2{color:#b34700}select,a.b{display:block;box-sizing:border-box;width:100%;padding:14px;margin:8px 0;font-size:16px;border-radius:10px}
+a.b{color:#fff;text-decoration:none;font-weight:600}
+#q{display:inline-block;background:#fff;padding:10px;margin-top:10px}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head><body>
+<h2>🪔 Pooja Booking</h2>
+<select id="p" onchange="go()">
+<option value="1">Test – ₹1</option>
+<option value="51">Archana – ₹51</option>
+<option value="101">Abhishekam – ₹101</option>
+</select>
+<a class="b" id="gpay" style="background:#1a73e8">Pay with Google Pay</a>
+<a class="b" id="phonepe" style="background:#5f259f">Pay with PhonePe</a>
+<a class="b" id="paytm" style="background:#00b9f1">Pay with Paytm</a>
+<a class="b" id="upi" style="background:#b34700">Other UPI apps</a>
+<div id="q"></div>
+<p style="font-size:13px;color:#666">Or scan the QR with any UPI app.</p>
+<script>
+function go(){
+  var s=document.getElementById('p'),am=s.value,tn=encodeURIComponent(s.options[s.selectedIndex].text.split(' –')[0]+' Pooja');
+  var q='pa=9137246460@ybl&pn=Temple&am='+am+'&cu=INR&tn='+tn;
+  document.getElementById('gpay').href='tez://upi/pay?'+q;
+  document.getElementById('phonepe').href='phonepe://pay?'+q;
+  document.getElementById('paytm').href='paytmmp://pay?'+q;
+  document.getElementById('upi').href='upi://pay?'+q;
+  var d=document.getElementById('q');d.innerHTML='';new QRCode(d,{text:'upi://pay?'+q,width:180,height:180});
+}
+go();
+</script>
+</body></html>
