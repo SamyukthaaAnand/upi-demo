@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Temple Pooja – UPI Demo</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:360px;margin:40px auto;padding:0 16px;text-align:center;background:#fff8ee}
+h2{color:#b34700}select,button{width:100%;padding:14px;margin:8px 0;font-size:16px;border-radius:10px}
+button{background:#b34700;color:#fff;border:0;font-weight:600}
+#q{display:inline-block;background:#fff;padding:10px;margin-top:10px}</style><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script></head><body>
+<h2>🪔 Pooja Booking</h2>
+<select id="p" onchange="pay()">
+<option value="1">Test – ₹1</option>
+<option value="51">Archana – ₹51</option>
+<option value="101">Abhishekam – ₹101</option>
+</select>
+<a id="b" target="_top"><button>Pay with UPI</button></a>
+<div id="q"></div><p style="font-size:13px">If the button does nothing, scan this QR (or screenshot it → GPay → Scan → upload from gallery).</p><p style="font-size:13px;color:#666">Opens GPay/PhonePe with amount filled in. Use on a phone.</p>
+<script>
+function pay(){
+  var s=document.getElementById('p'),amt=s.value,note=s.options[s.selectedIndex].text.split(' –')[0];
+  var u='upi://pay?pa=9137246460@ybl&pn=Temple&am='+amt+'&cu=INR&tn='+encodeURIComponent(note+' Pooja');document.getElementById('b').href=u;var q=document.getElementById('q');q.innerHTML='';new QRCode(q,{text:u,width:200,height:200});
+}
+pay();</script>
+</body></html>
